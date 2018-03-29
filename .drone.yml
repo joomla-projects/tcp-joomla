@@ -13,8 +13,8 @@ pipeline:
   initdb:
     image: joomlaprojects/docker-php70:develop
     commands:
-      - /bin/bash ./build/drone/database-setup.sh
       - composer install
+      - /bin/bash ./build/drone/database-setup.sh
 
   php70:
     group: php

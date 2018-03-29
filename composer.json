@@ -90,6 +90,6 @@
         "joomla-projects/joomla-browser": "~4.0@dev",
         "joomla/test-system": "dev-master",
         "joomla/test-unit": "dev-master",
-        "test-integration": "dev-master"
+        "joomla/test-integration": "dev-master"
     }
 }

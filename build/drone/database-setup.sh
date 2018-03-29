@@ -17,9 +17,9 @@ mysql -u root -h mysql -pjoomla_ut -e "ALTER DATABASE joomla_71 CHARACTER SET ut
 mysql -u root -h mysql -pjoomla_ut -e "ALTER DATABASE joomla_72 CHARACTER SET utf8 COLLATE utf8_general_ci;"
 
 
-mysql -u root -h mysql -pjoomla_ut joomla_70 < "$BASE/tests/unit/schema/mysql.sql"
-mysql -u root -h mysql -pjoomla_ut joomla_71 < "$BASE/tests/unit/schema/mysql.sql"
-mysql -u root -h mysql -pjoomla_ut joomla_72 < "$BASE/tests/unit/schema/mysql.sql"
+# mysql -u root -h mysql -pjoomla_ut joomla_70 < "$BASE/tests/unit/schema/mysql.sql"
+# mysql -u root -h mysql -pjoomla_ut joomla_71 < "$BASE/tests/unit/schema/mysql.sql"
+# mysql -u root -h mysql -pjoomla_ut joomla_72 < "$BASE/tests/unit/schema/mysql.sql"
 ########
 
 echo "#### Setup Postgres Databases ####"
@@ -28,7 +28,7 @@ psql -c 'create database joomla_70;'  -U postgres -h "postgres" > /dev/null
 psql -c 'create database joomla_71;'  -U postgres -h "postgres" > /dev/null
 psql -c 'create database joomla_72;'  -U postgres -h "postgres" > /dev/null
 
-psql -U "postgres" -h "postgres" -d joomla_70 -a -f "$BASE/tests/unit/schema/postgresql.sql" > /dev/null
-psql -U "postgres" -h "postgres" -d joomla_71 -a -f "$BASE/tests/unit/schema/postgresql.sql" > /dev/null
-psql -U "postgres" -h "postgres" -d joomla_72 -a -f "$BASE/tests/unit/schema/postgresql.sql" > /dev/null
+# psql -U "postgres" -h "postgres" -d joomla_70 -a -f "$BASE/tests/unit/schema/postgresql.sql" > /dev/null
+# psql -U "postgres" -h "postgres" -d joomla_71 -a -f "$BASE/tests/unit/schema/postgresql.sql" > /dev/null
+# psql -U "postgres" -h "postgres" -d joomla_72 -a -f "$BASE/tests/unit/schema/postgresql.sql" > /dev/null
 
