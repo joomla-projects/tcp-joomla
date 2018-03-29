@@ -10,6 +10,30 @@ pipeline:
       - /root/.composer/vendor/bin/phpcs --report=full --extensions=php -p --standard=build/phpcs/Joomla .
       - echo $(date)
 
+  initdb:
+    image: joomlaprojects/docker-php70:develop
+    commands:
+      - /bin/bash ./build/drone/database-setup.sh
+      - composer install
+
+  php70:
+    group: php
+    image: joomlaprojects/docker-php70:develop
+    environment:
+      - JTEST_DATABASE_MYSQL_DSN="host=mysql;dbname=joomla_70;user=joomla_ut;pass=joomla_ut"
+      - JTEST_DATABASE_MYSQLI_DSN="host=mysql;dbname=joomla_70;user=joomla_ut;pass=joomla_ut"
+      - JTEST_DATABASE_PDO_MYSQL_DSN="host=mysql;dbname=joomla_70;user=joomla_ut;pass=joomla_ut"
+      - JTEST_DATABASE_POSTGRESQL_DSN="host=postgres;port=5432;dbname=joomla_70;user=postgres;pass="
+    commands:
+      - echo $(date)
+      - JTEST_DATABASE_MYSQL_DSN="host=mysql;dbname=joomla_70;user=joomla_ut;pass=joomla_ut"
+      - JTEST_DATABASE_MYSQLI_DSN="host=mysql;dbname=joomla_70;user=joomla_ut;pass=joomla_ut"
+      - JTEST_DATABASE_PDO_MYSQL_DSN="host=mysql;dbname=joomla_70;user=joomla_ut;pass=joomla_ut"
+      - JTEST_DATABASE_POSTGRESQL_DSN="host=postgres;port=5432;dbname=joomla_70;user=postgres;pass="
+      - ./libraries/vendor/bin/phpunit -c drone-phpunit.xml
+      - echo $(date)
+
+
   javascript:
     image: joomlaprojects/docker-systemtests:latest
     commands:
@@ -19,9 +43,26 @@ pipeline:
       - export DISPLAY=:0
       - Xvfb -screen 0 1024x768x24 -ac +extension GLX +render -noreset > /dev/null 2>&1 &
       - sleep 3
-      - mv -f drone-package.json package.json
       - fluxbox  > /dev/null 2>&1 &
+      - cd tests/javascript
       - npm install
-      - node_modules/karma/bin/karma start karma.conf.js --single-run
+      - cd ../..
+      - tests/javascript/node_modules/karma/bin/karma start karma.conf.js --single-run
       - echo $(date)
 
+services:
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_USER: joomla_ut
+      MYSQL_PASSWORD: joomla_ut
+      MYSQL_ROOT_PASSWORD: joomla_ut
+
+  memcached:
+    image: memcached:alpine
+
+  redis:
+    image: redis:alpine
+
+  postgres:
+    image: postgres
