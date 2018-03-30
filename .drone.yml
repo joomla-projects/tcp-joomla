@@ -3,6 +3,7 @@ pipeline:
     image: plugins/git
     depth: 1
 
+
   analysis:
     image: rips/rips-cli
     secrets:  [rips_username, rips_password, test]
