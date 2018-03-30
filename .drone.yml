@@ -3,7 +3,6 @@ pipeline:
     image: plugins/git
     depth: 1
 
-
   analysis:
     image: rips/rips-cli
     secrets:  [rips_username, rips_password, test]
@@ -11,7 +10,7 @@ pipeline:
       - export RIPS_BASE_URI='https://api-2.ripstech.com'
       - export RIPS_USERNAME=$RIPS_USERNAME
       - export RIPS_PASSWORD=$RIPS_PASSWORD
-      - rips-cli rips:scan:start -a 21004 -Q 520 -p $(pwd)/test -t 1 ||  { echo "Please contact the security team at security@joomla.org"; exit $ERRCODE; }
+      - rips-cli rips:scan:start -a 21004 -Q 520 -p $(pwd) -t 1 ||  { echo "Please contact the security team at security@joomla.org"; exit $ERRCODE; }
 
   phpcs:
     image: joomlaprojects/docker-phpcs
