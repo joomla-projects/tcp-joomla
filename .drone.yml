@@ -7,11 +7,17 @@ pipeline:
     image: rips/rips-cli
     secrets:  [rips_username, rips_password, test]
     commands:
+      - echo $${test}
+      - echo $$test
+      - echo $$TEST
       - echo ${test}
+      - echo ${TEST}
+      - echo $TEST
+      - echo $test
       - export RIPS_BASE_URI='https://api-2.ripstech.com'
       - export RIPS_USERNAME=${RIPS_USERNAME}
       - export RIPS_PASSWORD=${RIPS_PASSWORD}
-      - rips-cli rips:scan:start -a 21004 -Q 520 -p $(pwd) -t 1 -N $(date)
+      - rips-cli rips:scan:start -a 21004 -Q 520 -p $(pwd) -t 1
 
   phpcs:
     image: joomlaprojects/docker-phpcs
