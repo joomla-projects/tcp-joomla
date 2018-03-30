@@ -7,7 +7,7 @@ pipeline:
     image: rips/rips-cli
     secrets:  [RIPS_BASE_URI, RIPS_USERNAME, RIPS_PASSWORD ]
     commands:
-      - export RIPS_BASE_URI=${RIPS_BASE_URI}
+      - export RIPS_BASE_URI='https://api-2.ripstech.com'
       - export RIPS_USERNAME=${RIPS_USERNAME}
       - export RIPS_PASSWORD=${RIPS_PASSWORD}
       - rips-cli rips:scan:start -a 21004 -Q 520 -p $(pwd) -t 1
