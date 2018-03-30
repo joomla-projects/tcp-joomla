@@ -16,56 +16,23 @@ pipeline:
       - composer install
       - /bin/bash ./build/drone/database-setup.sh
 
-  php70:
-    group: php
+  php70-unit:
+    group: unit
     image: joomlaprojects/docker-php70:develop
-    environment:
-      - JTEST_DATABASE_MYSQL_DSN="host=mysql;dbname=joomla_70;user=joomla_ut;pass=joomla_ut"
-      - JTEST_DATABASE_MYSQLI_DSN="host=mysql;dbname=joomla_70;user=joomla_ut;pass=joomla_ut"
-      - JTEST_DATABASE_PDO_MYSQL_DSN="host=mysql;dbname=joomla_70;user=joomla_ut;pass=joomla_ut"
-      - JTEST_DATABASE_POSTGRESQL_DSN="host=postgres;port=5432;dbname=joomla_70;user=postgres;pass="
     commands:
-      - echo $(date)
-      - JTEST_DATABASE_MYSQL_DSN="host=mysql;dbname=joomla_70;user=joomla_ut;pass=joomla_ut"
-      - JTEST_DATABASE_MYSQLI_DSN="host=mysql;dbname=joomla_70;user=joomla_ut;pass=joomla_ut"
-      - JTEST_DATABASE_PDO_MYSQL_DSN="host=mysql;dbname=joomla_70;user=joomla_ut;pass=joomla_ut"
-      - JTEST_DATABASE_POSTGRESQL_DSN="host=postgres;port=5432;dbname=joomla_70;user=postgres;pass="
       - ./libraries/vendor/bin/phpunit --configuration ./libraries/vendor/joomla/test-unit/phpunit.xml.dist
-      - echo $(date)
 
-  php71:
-    group: php
+  php71-unit:
+    group: unit
     image: joomlaprojects/docker-php71:develop
-    environment:
-      - JTEST_DATABASE_MYSQL_DSN="host=mysql;dbname=joomla_71;user=joomla_ut;pass=joomla_ut"
-      - JTEST_DATABASE_MYSQLI_DSN="host=mysql;dbname=joomla_71;user=joomla_ut;pass=joomla_ut"
-      - JTEST_DATABASE_PDO_MYSQL_DSN="host=mysql;dbname=joomla_71;user=joomla_ut;pass=joomla_ut"
-      - JTEST_DATABASE_POSTGRESQL_DSN="host=postgres;port=5432;dbname=joomla_71;user=postgres;pass="
     commands:
-      - echo $(date)
-      - JTEST_DATABASE_MYSQL_DSN="host=mysql;dbname=joomla_71;user=joomla_ut;pass=joomla_ut"
-      - JTEST_DATABASE_MYSQLI_DSN="host=mysql;dbname=joomla_71;user=joomla_ut;pass=joomla_ut"
-      - JTEST_DATABASE_PDO_MYSQL_DSN="host=mysql;dbname=joomla_71;user=joomla_ut;pass=joomla_ut"
-      - JTEST_DATABASE_POSTGRESQL_DSN="host=postgres;port=5432;dbname=joomla_71;user=postgres;pass="
       - ./libraries/vendor/bin/phpunit --configuration ./libraries/vendor/joomla/test-unit/phpunit.xml.dist
-      - echo $(date)
 
-  php72:
-    group: php
+  php72-unit:
+    group: unit
     image: joomlaprojects/docker-php72:develop
-    environment:
-      - JTEST_DATABASE_MYSQL_DSN="host=mysql;dbname=joomla_72;user=joomla_ut;pass=joomla_ut"
-      - JTEST_DATABASE_MYSQLI_DSN="host=mysql;dbname=joomla_72;user=joomla_ut;pass=joomla_ut"
-      - JTEST_DATABASE_PDO_MYSQL_DSN="host=mysql;dbname=joomla_72;user=joomla_ut;pass=joomla_ut"
-      - JTEST_DATABASE_POSTGRESQL_DSN="host=postgres;port=5432;dbname=joomla_72;user=postgres;pass="
     commands:
-      - echo $(date)
-      - JTEST_DATABASE_MYSQL_DSN="host=mysql;dbname=joomla_72;user=joomla_ut;pass=joomla_ut"
-      - JTEST_DATABASE_MYSQLI_DSN="host=mysql;dbname=joomla_72;user=joomla_ut;pass=joomla_ut"
-      - JTEST_DATABASE_PDO_MYSQL_DSN="host=mysql;dbname=joomla_72;user=joomla_ut;pass=joomla_ut"
-      - JTEST_DATABASE_POSTGRESQL_DSN="host=postgres;port=5432;dbname=joomla_72;user=postgres;pass="
       - ./libraries/vendor/bin/phpunit --configuration ./libraries/vendor/joomla/test-unit/phpunit.xml.dist
-      - echo $(date)
 
 services:
   mysql:
