@@ -33,7 +33,6 @@ pipeline:
       - ./libraries/vendor/bin/phpunit --configuration ./libraries/vendor/joomla/test-unit/phpunit.xml.dist
       - echo $(date)
 
-
   javascript:
     image: joomlaprojects/docker-systemtests:latest
     commands:
