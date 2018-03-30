@@ -64,7 +64,7 @@ pipeline:
       - JTEST_DATABASE_MYSQLI_DSN="host=mysql;dbname=joomla_72;user=joomla_ut;pass=joomla_ut"
       - JTEST_DATABASE_PDO_MYSQL_DSN="host=mysql;dbname=joomla_72;user=joomla_ut;pass=joomla_ut"
       - JTEST_DATABASE_POSTGRESQL_DSN="host=postgres;port=5432;dbname=joomla_72;user=postgres;pass="
-      ./libraries/vendor/bin/phpunit --configuration ./libraries/vendor/joomla/test-unit/phpunit.xml.dist
+      - ./libraries/vendor/bin/phpunit --configuration ./libraries/vendor/joomla/test-unit/phpunit.xml.dist
       - echo $(date)
 
 services:
