@@ -33,21 +33,38 @@ pipeline:
       - ./libraries/vendor/bin/phpunit --configuration ./libraries/vendor/joomla/test-unit/phpunit.xml.dist
       - echo $(date)
 
-
-  javascript:
-    image: joomlaprojects/docker-systemtests:latest
+  php71:
+    group: php
+    image: joomlaprojects/docker-php71:develop
+    environment:
+      - JTEST_DATABASE_MYSQL_DSN="host=mysql;dbname=joomla_71;user=joomla_ut;pass=joomla_ut"
+      - JTEST_DATABASE_MYSQLI_DSN="host=mysql;dbname=joomla_71;user=joomla_ut;pass=joomla_ut"
+      - JTEST_DATABASE_PDO_MYSQL_DSN="host=mysql;dbname=joomla_71;user=joomla_ut;pass=joomla_ut"
+      - JTEST_DATABASE_POSTGRESQL_DSN="host=postgres;port=5432;dbname=joomla_71;user=postgres;pass="
     commands:
       - echo $(date)
-      - apt-get install nodejs npm
-      - ln -s /usr/bin/nodejs /usr/bin/node
-      - export DISPLAY=:0
-      - Xvfb -screen 0 1024x768x24 -ac +extension GLX +render -noreset > /dev/null 2>&1 &
-      - sleep 3
-      - fluxbox  > /dev/null 2>&1 &
-      - cd tests/javascript
-      - npm install
-      - cd ../..
-      - tests/javascript/node_modules/karma/bin/karma start karma.conf.js --single-run
+      - JTEST_DATABASE_MYSQL_DSN="host=mysql;dbname=joomla_71;user=joomla_ut;pass=joomla_ut"
+      - JTEST_DATABASE_MYSQLI_DSN="host=mysql;dbname=joomla_71;user=joomla_ut;pass=joomla_ut"
+      - JTEST_DATABASE_PDO_MYSQL_DSN="host=mysql;dbname=joomla_71;user=joomla_ut;pass=joomla_ut"
+      - JTEST_DATABASE_POSTGRESQL_DSN="host=postgres;port=5432;dbname=joomla_71;user=postgres;pass="
+      - ./libraries/vendor/bin/phpunit --configuration ./libraries/vendor/joomla/test-unit/phpunit.xml.dist
+      - echo $(date)
+
+  php72:
+    group: php
+    image: joomlaprojects/docker-php72:develop
+    environment:
+      - JTEST_DATABASE_MYSQL_DSN="host=mysql;dbname=joomla_72;user=joomla_ut;pass=joomla_ut"
+      - JTEST_DATABASE_MYSQLI_DSN="host=mysql;dbname=joomla_72;user=joomla_ut;pass=joomla_ut"
+      - JTEST_DATABASE_PDO_MYSQL_DSN="host=mysql;dbname=joomla_72;user=joomla_ut;pass=joomla_ut"
+      - JTEST_DATABASE_POSTGRESQL_DSN="host=postgres;port=5432;dbname=joomla_72;user=postgres;pass="
+    commands:
+      - echo $(date)
+      - JTEST_DATABASE_MYSQL_DSN="host=mysql;dbname=joomla_72;user=joomla_ut;pass=joomla_ut"
+      - JTEST_DATABASE_MYSQLI_DSN="host=mysql;dbname=joomla_72;user=joomla_ut;pass=joomla_ut"
+      - JTEST_DATABASE_PDO_MYSQL_DSN="host=mysql;dbname=joomla_72;user=joomla_ut;pass=joomla_ut"
+      - JTEST_DATABASE_POSTGRESQL_DSN="host=postgres;port=5432;dbname=joomla_72;user=postgres;pass="
+      ./libraries/vendor/bin/phpunit --configuration ./libraries/vendor/joomla/test-unit/phpunit.xml.dist
       - echo $(date)
 
 services:
