@@ -3,6 +3,21 @@ pipeline:
     image: plugins/git
     depth: 1
 
+  javascript:
+    image: joomlaprojects/docker-systemtests:latest
+    commands:
+      - echo $(date)
+      - apt-get install nodejs npm
+      - ln -s /usr/bin/nodejs /usr/bin/node
+      - export DISPLAY=:0
+      - Xvfb -screen 0 1024x768x24 -ac +extension GLX +render -noreset > /dev/null 2>&1 &
+      - sleep 3
+      - mv -f drone-package.json package.json
+      - fluxbox  > /dev/null 2>&1 &
+      - npm install
+      - node_modules/karma/bin/karma start node_modules/joomla-javascript-tests/src/karma.conf.js --single-run
+      - echo $(date)
+
   phpcs:
     image: joomlaprojects/docker-phpcs
     commands:
@@ -32,21 +47,6 @@ pipeline:
     image: joomlaprojects/docker-php72:develop
     commands:
       - ./libraries/vendor/bin/phpunit --configuration ./libraries/vendor/joomla/test-unit/phpunit.xml.dist
-
-  javascript:
-    image: joomlaprojects/docker-systemtests:latest
-    commands:
-      - echo $(date)
-      - apt-get install nodejs npm
-      - ln -s /usr/bin/nodejs /usr/bin/node
-      - export DISPLAY=:0
-      - Xvfb -screen 0 1024x768x24 -ac +extension GLX +render -noreset > /dev/null 2>&1 &
-      - sleep 3
-      - mv -f drone-package.json package.json
-      - fluxbox  > /dev/null 2>&1 &
-      - npm install
-      - node_modules/karma/bin/karma start node_modules/joomla-javascript-tests/src/karma.conf.js --single-run
-      - echo $(date)
 
 services:
   mysql:
