@@ -10,11 +10,7 @@ pipeline:
       - export RIPS_BASE_URI='https://api-2.ripstech.com'
       - export RIPS_USERNAME=$RIPS_USERNAME
       - export RIPS_PASSWORD=$RIPS_PASSWORD
-      - echo $DRONE_REPO_OWNER
-      - echo DRONE_REPO_OWNER
-      - echo $DRONE_REPO_NAME
-      - echo DRONE_REPO_NAME
-      - rips-cli rips:scan:start -a 21004 -Q 520 -p $(pwd) -t 1 -T $DRONE_BRANCH ||  { echo "Please contact the security team at security@joomla.org"; exit 1; }
+      - rips-cli rips:scan:start -a 21004 -Q 520 -p $(pwd) -t 1 -T $DRONE_REPO_OWNER-$DRONE_BRANCH ||  { echo "Please contact the security team at security@joomla.org"; exit 1; }
 
   phpcs:
     image: joomlaprojects/docker-phpcs
